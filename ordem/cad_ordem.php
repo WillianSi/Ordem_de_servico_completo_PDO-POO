@@ -3,14 +3,17 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php'); 
 require_once('../layout/sidebar.php');
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
 
+$objCli = new Generica();
+$objSer = new Generica();
+$objTer = new Generica();
 $tabela = "cliente";
-$clientes = listaDados($tabela);
+$clientes = $objCli->listaDados($tabela);
 $tabela = "servico";
-$servicos = listaDados($tabela);
+$servicos = $objSer->listaDados($tabela);
 $tabela = "terceirizado";
-$terceirizados = listaDados($tabela);
+$terceirizados = $objTer->listaDados($tabela);
 ?>
 
 <!-- Main Content -->

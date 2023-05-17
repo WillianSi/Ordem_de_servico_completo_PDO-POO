@@ -6,8 +6,9 @@ require_once('../layout/sidebar.php');
 require_once ("../Classes/Generica.class.php");
 
 $tabela = "cliente";
-$objCli = new Generica();;
-$dados = $objCli->buscaDadoseditarPerfil($tabela,$_SESSION['cod_usu']);
+$objCli = new Generica();
+$codigo = $_SESSION['cod_usu'];
+$dados = $objCli->buscaDadoseditarPerfil($tabela,$codigo);
 $nome = $dados["nome"];
 $email = $dados["email"];
 $endereco = $dados["endereco"];

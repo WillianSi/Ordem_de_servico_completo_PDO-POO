@@ -1,14 +1,15 @@
 <?php
 require_once("../valida_session/valida_session.php");
-require_once ("../bd/bd_cliente.php");
-require_once ("../bd/bd_generico.php");
-	     
+require_once ("../Classes/Generica.class.php");
+
+$objCli = new Generica();
+
 $codigo = $_POST["cod"];
 $status = $_POST["status"];
 $data=date("y/m/d");
 
 $tabela = 'cliente';
-$dados = editarInfo($tabela,$codigo,$status,$data);
+$dados = $objCli->queryEditar($tabela,$codigo,$status,$data);
 
 if ($dados == 1){
 	$_SESSION['texto_sucesso'] = 'Os dados do cliente foram alterados no sistema.';

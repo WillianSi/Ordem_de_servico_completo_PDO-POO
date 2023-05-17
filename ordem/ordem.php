@@ -70,8 +70,9 @@ require_once('../layout/sidebar.php');
                         </thead>
                         <tbody>
                             <?php 
-                            require_once ("../bd/bd_ordem.php");
-                            $ordem = listaOrdem();
+                            require_once ("../Classes/Ordem.class.php");
+                            $objOrd = new Ordem();
+                            $ordem =  $objOrd->listaOrdem();
                             foreach($ordem as $dados): 
                                 ?>
                                 <tr>

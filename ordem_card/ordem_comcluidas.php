@@ -85,9 +85,10 @@ require_once('../layout/sidebar.php');
 
                         <tbody>
                             <?php
-                            require_once("../bd/bd_ordem.php");
+                            require_once("../Classes/Ordem.class.php");
+                            $objOrd = new Ordem();
                             if ($_SESSION['perfil'] == 1) {
-                                $ordem = listaOrdem();
+                                $ordem =  $objOrd->listaOrdem();
                                 foreach ($ordem as $dados) :
                                     if ($dados['status'] == 3) : ?>
                                         <tr>
@@ -122,7 +123,7 @@ require_once('../layout/sidebar.php');
                             }
 
                             if ($_SESSION['perfil'] == 2) {
-                                $ordem = listaOrdemCliente();
+                                $ordem =  $objOrd->listaOrdemCliente();
                                 foreach ($ordem as $dados) :
                                     if ($dados['status'] == 3) : ?>
                                         <tr>
@@ -135,7 +136,7 @@ require_once('../layout/sidebar.php');
                                 endforeach;
                             }
                             if ($_SESSION['perfil'] == 3) {
-                                $ordem = listaOrdemTerceirizado();
+                                $ordem =  $objOrd->listaOrdemTerceirizado();
                                 foreach ($ordem as $dados) :
                                     if ($dados['status'] == 3) : ?>
                                         <tr>

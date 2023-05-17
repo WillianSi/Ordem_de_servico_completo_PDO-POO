@@ -4,9 +4,13 @@ $nome = $_POST["nome"];
 $valor = $_POST["valor"];
 $data=date("y/m/d");
 
-require_once ("../bd/bd_servico.php");
+require_once ("../Classes/Generica.class.php");
 
-$dados = cadastraServico($nome,$valor,$data);
+$objSer = new Generica();
+$tabela = 'servico';
+$dadosCliente = array('nome' => $nome,'valor' => $valor,'data' => $data);
+$dados = $objSer->cadastrarDados($tabela, $dadosCliente);
+
 if($dados == 1){
 	$_SESSION['texto_sucesso'] = 'Dados adicionados com sucesso.';
 	unset ($_SESSION['nome']);
@@ -19,6 +23,4 @@ if($dados == 1){
 	$_SESSION['valor'] = $valor;
 	header ("Location:cad_servico.php");
 }
-
-
 ?>

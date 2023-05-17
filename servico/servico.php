@@ -70,9 +70,10 @@ unset ($_SESSION['valor']);
                         </thead>
                         <tbody>
                             <?php 
-                            require_once ("../bd/bd_generico.php");
+                            require_once ("../Classes/Generica.class.php");
+                            $objCli = new Generica();
                             $tabela= "servico";
-                            $servicos = listaDados($tabela);
+                            $servicos = $objCli->listaDados($tabela);
                             foreach($servicos as $dados): 
                                 ?>
                                 <tr>

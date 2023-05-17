@@ -1,10 +1,11 @@
 <?php 
 	require_once("../valida_session/valida_session.php");
-	require_once ("../bd/bd_generico.php");
+	require_once ("../Classes/Generica.class.php");
 
 	$codigo = $_GET['cod'];
+	$objOrd = new Generica();
 	$tabela = "ordem";
-	$dados = removeDados($tabela,$codigo);
+	$dados = $objOrd->removeDados($tabela,$codigo);
 
 	if($dados == 0){
 		$_SESSION['texto_erro'] = 'Os dados da ordem se serviço não foram excluidos do sistema!';

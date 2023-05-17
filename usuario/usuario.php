@@ -2,7 +2,7 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php'); 
 require_once('../layout/sidebar.php');
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
 
 unset ($_SESSION['nome']);
 unset ($_SESSION['email']);
@@ -76,9 +76,10 @@ unset ($_SESSION['senha']);
                         </thead>
                         <tbody>
                             <?php 
-                            require_once ("../bd/bd_generico.php");
+                            require_once ("../Classes/Generica.class.php");
+                            $objUsu = new Generica();
                             $tabela= "usuario";
-                            $usuarios = listaDados($tabela);
+                            $usuarios = $objUsu->listaDados($tabela);
                             foreach($usuarios as $dados): 
                                 ?>
                                 <tr>

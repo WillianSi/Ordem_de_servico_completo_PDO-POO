@@ -3,12 +3,12 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php'); 
 require_once('../layout/sidebar.php');  
-require_once ("../bd/bd_servico.php");
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
 
+$objSer = new Generica();
 $codigo = $_GET['cod'];
 $tabela = 'servico';
-$dados = buscaDadoseditarPerfil($tabela,$codigo);
+$dados = $objSer->buscaDadoseditarPerfil($tabela,$codigo);
 $nome = $dados["nome"];
 $valor = $dados["valor"];
 ?>

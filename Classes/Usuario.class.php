@@ -7,6 +7,7 @@
         private $nome;
         private $email;
         private $data;
+        private $senha;
         private $perfil;
         private $status;
 
@@ -43,6 +44,36 @@
                 return 'error'.$ex->getMessage(); 
             }
         
+        }
+
+        public function cadastraUsuario($nome,$senha,$email,$perfil,$status,$data){
+            try {
+
+                $this->nome = $nome;
+                $this->senha = $senha;
+                $this->email = $email;
+                $this->perfil = $perfil;
+                $this->status = $status;
+                $this->data = $data;
+
+                $query = $this->con->conectar()->prepare("INSERT INTO usuario(nome,senha,email,
+                            perfil,status,data) VALUES (?,?,?,?,?,?)");
+        
+                $query->bindParam(1,$this->nome);
+                $query->bindParam(2,$this->senha);
+                $query->bindParam(3,$this->email);
+                $query->bindParam(4,$this->perfil);
+                $query->bindParam(5,$this->status);
+                $query->bindParam(6,$this->data);
+                $retorno = $query->execute();
+                if($retorno){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            } catch (PDOException $ex){
+                return 'error'.$ex->getMessage(); 
+            }        
         }
     }
 ?>

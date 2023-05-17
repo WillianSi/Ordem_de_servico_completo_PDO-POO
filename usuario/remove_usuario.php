@@ -1,6 +1,6 @@
 <?php 
 	require_once("../valida_session/valida_session.php");
-	require_once ("../bd/bd_generico.php");
+	require_once ("../Classes/Generica.class.php");
 
 	$codigo = $_GET['cod'];
 
@@ -9,8 +9,9 @@
 		header ("Location:usuario.php");
 	}
 	else{
+		$objUsu = new Generica();
 		$tabela = "usuario";
-		$dados = removeDados($tabela,$codigo);
+		$dados = $objUsu->removeDados($tabela,$codigo);
 
 		if($dados == 0){
 			$_SESSION['texto_erro'] = 'Os dados do usuário não foram excluidos do sistema!';

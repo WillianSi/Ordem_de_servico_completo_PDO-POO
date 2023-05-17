@@ -1,15 +1,15 @@
 <?php
 require_once("../valida_session/valida_session.php");
-require_once ("../bd/bd_terceirizado.php");
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
+
+$objTer = new Generica();
 	     
 $codigo = $_POST["cod"];
 $status = $_POST["status"];
 $data=date("y/m/d");
 
 $tabela = 'terceirizado';
-$dados = editarInfo($tabela,$codigo,$status,$data);
-
+$dados = $objTer->queryEditar($tabela,$codigo,$status,$data);
 
 if ($dados == 1){
 	$_SESSION['texto_sucesso'] = 'Os dados do terceirizado foram alterados no sistema.';

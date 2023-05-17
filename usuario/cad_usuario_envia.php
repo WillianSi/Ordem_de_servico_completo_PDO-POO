@@ -7,11 +7,11 @@ $perfil = 1;
 $status = $_POST["status"];
 $data=date("y/m/d");
 
-require_once ("../bd/bd_usuario.php");
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
 
+$objUsu = new Generica();
 $tabela = "usuario";
-$dados = consultaEmail($tabela,$email);
+$dados = $objUsu->consultaEmail($tabela,$email);
 
 if($dados != 0){
 	$_SESSION['texto_erro'] = 'Este email já existe cadastrado no sistema!';
@@ -19,7 +19,11 @@ if($dados != 0){
 	$_SESSION['email'] = $email;
 	header ("Location:cad_usuario.php");
 }else{
-	$dados = cadastraUsuario($nome,$senha,$email,$perfil,$status,$data);
+	$objUsu = new Generica();
+	$tabela = 'usuario';
+	$dadosCliente = array('nome' => $nome,'email' => $email,'senha' => $senha);
+	$dados = $objUsu->cadastrarDados($tabela, $dadosCliente);
+
 	if($dados == 1){
 		$_SESSION['texto_sucesso'] = 'Dados adicionados com sucesso.';
 		unset($_SESSION['texto_erro']);

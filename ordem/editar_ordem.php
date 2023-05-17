@@ -2,11 +2,12 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php');
 require_once('../layout/sidebar.php');
-require_once("../bd/bd_ordem.php");
-require_once("../bd/bd_generico.php");
+require_once("../Classes/Ordem.class.php");
+require_once("../Classes/Generica.class.php");
 
+$objOrd = new Ordem();
 $codigo = $_GET['cod'];
-$dados = buscaOrdemeditar($codigo);
+$dados = $objOrd->buscaOrdemeditar($codigo);
 
 $cod = $dados["cod"];
 $nome_cliente = $dados["nome_cliente"];
@@ -16,8 +17,9 @@ $data_servico = $dados["data_servico"];
 $status = $dados["status"];
 $cod_terceirizado = $dados["cod_terceirizado"];
 
+$objTer = new Generica();
 $tabela = 'terceirizado';
-$terceirizados = listaDados($tabela);
+$terceirizados = $objTer->listaDados($tabela);
 
 ?>
 

@@ -3,11 +3,10 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php'); 
 require_once('../layout/sidebar.php'); 
-require_once ("../bd/bd_ordem.php");
-require_once ("../bd/bd_cliente.php");
-require_once ("../bd/bd_terceirizado.php");
+require_once ("../Classes/Ordem.class.php");
 
-$dados = buscaOrdemadd();
+$objOrd = new Ordem();
+$dados = $objOrd->buscaOrdemadd();
 
 $nome_cliente = $dados['nome_cliente'];
 $nome_terceirizado = $dados['nome_terceirizada'];

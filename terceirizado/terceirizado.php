@@ -76,9 +76,10 @@ unset ($_SESSION['telefone']);
                         </thead>
                         <tbody>
                             <?php 
-                            require_once ("../bd/bd_generico.php");
+                            require_once ("../Classes/Generica.class.php");
+                            $objTer = new Generica();
                             $tabela= "terceirizado";
-                            $terceirizados = listaDados($tabela);
+                            $terceirizados = $objTer->listaDados($tabela);
                             foreach($terceirizados as $dados): 
                                 ?>
                                 <tr>

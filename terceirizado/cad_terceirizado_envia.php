@@ -8,11 +8,12 @@ $status = $_POST["status"];
 $perfil = 3;
 $data=date("y/m/d");
 
-require_once ("../bd/bd_terceirizado.php");
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
+require_once ("../Classes/Terceirizado.class.php");
 
+$objTer = new Generica();
 $tabela = "terceirizado";
-$dados = consultaEmail($tabela,$email);
+$dados = $objTer->consultaEmail($tabela,$email);
 
 if($dados != 0){
 	$_SESSION['texto_erro'] = 'Este email já existe cadastrado no sistema!';
@@ -22,7 +23,13 @@ if($dados != 0){
 	header ("Location:cad_terceirizado.php");
 }else{
 
-	$dados = cadastraTerceirizado($nome,$email,$telefone,$senha,$status,$perfil,$data);
+	$objTer = new Generica();
+	$tabela = 'cliente';
+	$dadosCliente = array('nome' => $nome,'senha' => $senha,'email' => $email,'telefone' => $telefone,'status' => $status,
+		'perfil' => $perfil,'data' => $data
+	);
+
+	$dados = $objTer->cadastrarDados($tabela, $dadosCliente);
 
 	if($dados == 1){
 		$_SESSION['texto_sucesso'] = 'Dados adicionados com sucesso.';

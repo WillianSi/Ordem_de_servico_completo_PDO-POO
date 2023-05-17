@@ -1,10 +1,11 @@
 <?php 
 	require_once("../valida_session/valida_session.php");
-	require_once ("../bd/bd_generico.php");
+	require_once ("../Classes/Generica.class.php");
 
 	$codigo = $_GET['cod'];
+	$objCli = new Generica();
 	$tabela = "cliente";
-	$dados = removeDados($tabela,$codigo);
+	$dados = $objCli->removeDados($tabela,$codigo);
 
 	if($dados == 0){
 		$_SESSION['texto_erro'] = 'Os dados do cliente não foram excluidos do sistema!';

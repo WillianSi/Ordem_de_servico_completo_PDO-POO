@@ -3,12 +3,12 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php'); 
 require_once('../layout/sidebar.php'); 
-require_once ('../bd/bd_cliente.php');
-require_once ('../bd/bd_generico.php');
+require_once ("../Classes/Generica.class.php");
 
 $codigo = $_GET['cod'];
+$objCli = new Generica();
 $tabela = 'cliente';
-$dados = buscaDadoseditarPerfil($tabela,$codigo);
+$dados = $objCli->buscaDadoseditarPerfil($tabela,$codigo);
 $nome = $dados["nome"];
 $email = $dados["email"];
 $endereco = $dados["endereco"];

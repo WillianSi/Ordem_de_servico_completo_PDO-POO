@@ -2,10 +2,14 @@
 require_once('../valida_session/valida_session.php');
 require_once('../layout/header.php'); 
 require_once('../layout/sidebar.php'); 
-require_once ('../bd/bd_ordem.php');
-require_once ("../bd/bd_generico.php");
-require_once ("../bd/bd_cliente.php");
-require_once ("../bd/bd_terceirizado.php");
+require_once ('../Classes/Ordem.class.php');
+require_once ('../Classes/Cliente.class.php');
+require_once ('../Classes/Terceirizado.class.php');
+
+$objUsu = new Ordem();
+$objCli = new Clientes();
+$objTer = new Tercerizado();
+$tabela = "ordem";
 ?>
 
 <!-- Main Content -->
@@ -30,23 +34,21 @@ require_once ("../bd/bd_terceirizado.php");
                             <?php
                                 if ($_SESSION['perfil'] == 1) {
                                     $status = 1;
-                                    $total = consultaStatusUsuario($status);
+                                    $total = $objUsu->consultaStatusUsuario($status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_aberta.php" style="color: #e74a3b;">' . $totalValue . '</a>';
                                 }
                                 if ($_SESSION['perfil'] == 2) {
                                     $cod_usuario = $_SESSION['cod_usu'];
                                     $status = 1;
-                                    $tabela= "ordem";
-                                    $total = consultaStatusCliente($tabela,$cod_usuario,$status);
+                                    $total = $objCli->consultaStatusCliente($tabela,$cod_usuario,$status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_aberta.php" style="color: #e74a3b;">' . $totalValue . '</a>';
                                 }
                                 if ($_SESSION['perfil'] == 3) {
                                     $cod_usuario = $_SESSION['cod_usu'];
                                     $status = 1;
-                                    $tabela= "ordem";
-                                    $total = consultaStatusTercerizado($tabela,$cod_usuario,$status);
+                                    $total = $objTer->consultaStatusTercerizado($tabela,$cod_usuario,$status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_aberta.php" style="color: #e74a3b;">' . $totalValue . '</a>';
                                 }
@@ -73,15 +75,14 @@ require_once ("../bd/bd_terceirizado.php");
                               <?php
                                 if ($_SESSION['perfil'] == 1) {
                                     $status = 2;
-                                    $total = consultaStatusUsuario($status);
+                                    $total = $objUsu->consultaStatusUsuario($status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_execucao.php" style="color: #f6c23e;">' . $totalValue. '</a>';
                                 }
                                 if ($_SESSION['perfil'] == 2) {
                                     $cod_usuario = $_SESSION['cod_usu'];
                                     $status = 2;
-                                    $tabela= "ordem";
-                                    $total = consultaStatusCliente($tabela,$cod_usuario,$status);
+                                    $total = $objCli->consultaStatusCliente($tabela,$cod_usuario,$status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_execucao.php" style="color: #f6c23e;">' . $totalValue. '</a>';
                                 }
@@ -89,7 +90,7 @@ require_once ("../bd/bd_terceirizado.php");
                                     $cod_usuario = $_SESSION['cod_usu'];
                                     $status = 2;
                                     $tabela= "ordem";
-                                    $total = consultaStatusTercerizado($tabela,$cod_usuario,$status);
+                                    $total = $objTer->consultaStatusTercerizado($tabela,$cod_usuario,$status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_execucao.php" style="color: #f6c23e;">' . $totalValue. '</a>';
                                 }
@@ -115,7 +116,7 @@ require_once ("../bd/bd_terceirizado.php");
                                 <?php
                                 if ($_SESSION['perfil'] == 1) {
                                     $status = 3;
-                                    $total = consultaStatusUsuario($status);
+                                    $total = $objUsu->consultaStatusUsuario($status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_comcluidas.php" style="color: #36b9cc;">' . $totalValue . '</a>';
                                 }
@@ -123,7 +124,7 @@ require_once ("../bd/bd_terceirizado.php");
                                     $cod_usuario = $_SESSION['cod_usu'];
                                     $status = 3;
                                     $tabela= "ordem";
-                                    $total = consultaStatusCliente($tabela,$cod_usuario,$status);
+                                    $total = $objCli->consultaStatusCliente($tabela,$cod_usuario,$status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_comcluidas.php" style="color: #36b9cc;">' . $totalValue . '</a>';
                                 }
@@ -131,7 +132,7 @@ require_once ("../bd/bd_terceirizado.php");
                                     $cod_usuario = $_SESSION['cod_usu'];
                                     $status = 3;
                                     $tabela= "ordem";
-                                    $total = consultaStatusTercerizado($tabela,$cod_usuario,$status);
+                                    $total = $objTer->consultaStatusTercerizado($tabela,$cod_usuario,$status);
                                     $totalValue = $total['0']['total'];
                                     echo '<a href="../ordem_card/ordem_comcluidas.php" style="color: #36b9cc;">' . $totalValue . '</a>';
                                 }

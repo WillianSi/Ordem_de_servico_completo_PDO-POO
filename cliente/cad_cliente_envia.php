@@ -12,11 +12,12 @@ $status = $_POST["status"];
 $perfil = 2;
 $data=date("y/m/d");
 
-require_once ("../bd/bd_cliente.php");
-require_once ("../bd/bd_generico.php");
+require_once ("../Classes/Generica.class.php");
+//require_once ("../Classes/Cliente.class.php");
 
+$objCli = new Generica();
 $tabela = "cliente";
-$dados = consultaEmail($tabela,$email);
+$dados = $objCli->consultaEmail($tabela,$email);
 
 if($dados != 0){
 	$_SESSION['texto_erro'] = 'Este email já existe cadastrado no sistema!';
@@ -30,7 +31,14 @@ if($dados != 0){
 	header ("Location:cad_cliente.php");
 }else{
 
-	$dados = cadastraCliente($nome,$email,$senha,$endereco,$numero,$bairro,$cidade,$telefone,$status,$perfil,$data);
+	$objCli = new Generica();
+	$tabela = 'cliente';
+	$dadosCliente = array('nome' => $nome,'email' => $email,'senha' => $senha,'endereco' => $endereco,
+		'numero' => $numero,'bairro' => $bairro,'cidade' => $cidade,'telefone' => $telefone,'status' => $status,
+		'perfil' => $perfil,'data' => $data
+	);
+
+	$dados = $objCli->cadastrarDados($tabela, $dadosCliente);
 
 	if($dados == 1){
 		$_SESSION['texto_sucesso'] = 'Dados adicionados com sucesso.';

@@ -81,9 +81,10 @@ unset ($_SESSION['telefone']);
                         </thead>
                         <tbody>
                             <?php 
-                            require_once ("../bd/bd_generico.php");
+                            require_once ("../Classes/Generica.class.php");
+                            $objCli = new Generica();
                             $tabela= "cliente";
-                            $clientes = listaDados($tabela);
+                            $clientes = $objCli->listaDados($tabela);
                             foreach($clientes as $dados): 
                                 ?>
                                 <tr>
