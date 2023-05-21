@@ -5,7 +5,6 @@
         private $con;
         private $nome;
         private $codigo;
-        private $senha;
         private $email;
         private $endereco;
         private $numero;
@@ -14,7 +13,6 @@
         private $telefone;
         private $data;
         private $status;
-        private $perfil;
         private $cod_usuario;
 
         public function __construct(){
@@ -59,46 +57,6 @@
             } catch (PDOException $ex){
                 return 'error'.$ex->getMessage(); 
             }
-        }
-
-        public function queryInserir($nome,$email,$senha,$endereco,$numero,$bairro,$cidade,$telefone,$status,$perfil,$data){
-           try {
-            
-                $this->nome = $nome;
-                $this->email = $email;
-                $this->senha = $senha;
-                $this->endereco = $endereco;
-                $this->numero = $numero;
-                $this->bairro = $bairro;
-                $this->cidade = $cidade;
-                $this->telefone = $telefone;
-                $this->status = $status;
-                $this->perfil = $perfil;
-                $this->data = $data;
-
-                $query =$this->con->conectar()->prepare("INSERT INTO cliente(nome,email,senha,endereco,numero,bairro,
-                cidade,telefone,status,perfil,data) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-
-                $query->bindParam(1,$this->nome);
-                $query->bindParam(2,$this->email);
-                $query->bindParam(3,$this->senha);
-                $query->bindParam(4,$this->endereco);
-                $query->bindParam(5,$this->numero);
-                $query->bindParam(6,$this->bairro);
-                $query->bindParam(7,$this->cidade);
-                $query->bindParam(8,$this->telefone);
-                $query->bindParam(9,$this->status);
-                $query->bindParam(10,$this->perfil);
-                $query->bindParam(11,$this->data);
-                $retorno = $query->execute();
-                if($retorno){
-                    return 1;
-                } else{
-                    return 0;
-                }  
-           } catch (PDOException $ex){
-            return 'error'.$ex->getMessage(); 
-           }      
         }
 
         public function consultaStatusCliente($tabela,$cod_usuario,$status){

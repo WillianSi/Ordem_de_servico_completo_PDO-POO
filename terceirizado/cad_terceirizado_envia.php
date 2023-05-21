@@ -9,7 +9,6 @@ $perfil = 3;
 $data=date("y/m/d");
 
 require_once ("../Classes/Generica.class.php");
-require_once ("../Classes/Terceirizado.class.php");
 
 $objTer = new Generica();
 $tabela = "terceirizado";

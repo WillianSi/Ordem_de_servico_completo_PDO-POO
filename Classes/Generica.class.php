@@ -6,6 +6,8 @@ class Generica
     private $con;
     private $tabela;
     private $codigo;
+    private $status;
+    private $data;
 
     public function __construct()
     {
@@ -157,6 +159,36 @@ class Generica
             }
         } catch (PDOException $ex) {
             return 'error'.$ex->getMessage();
+        }
+    }
+
+    public function queryEditar ($tabela,$codigo,$status,$data){
+        try {
+
+            $this->tabela = $tabela;
+            $this->codigo = $codigo;
+            $this->status = $status;
+            $this->data = $data;
+            
+            $query = $this->con->conectar()->prepare("SELECT * FROM $this->tabela WHERE cod = ?");
+            $query->bindParam(1,$codigo);
+            $query->execute();
+            $retorno = $query->fetch(PDO::FETCH_ASSOC);
+        
+            if(count($retorno) > 0){
+                $query = $this->con->conectar()->prepare("UPDATE $this->tabela SET status = ?, data = ? WHERE cod = ?");
+                $query->bindParam(1, $status);
+                $query->bindParam(2, $data);
+                $query->bindParam(3, $codigo);
+                $retorno = $query->execute();//retorno boolean padrao TRUE
+                if($retorno){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            }   
+        } catch (PDOException $ex){
+            return 'error'.$ex->getMessage(); 
         }
     }
 }

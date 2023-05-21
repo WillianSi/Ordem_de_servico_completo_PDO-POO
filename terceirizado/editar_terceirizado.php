@@ -7,7 +7,7 @@ require_once ("../Classes/Generica.class.php");
 
 $codigo = $_GET['cod'];
 $objTer = new Generica();
-$tabela = 'terceirazado';
+$tabela = 'terceirizado';
 $dados = $objTer->buscaDadoseditarPerfil($tabela,$codigo);
 $nome = $dados["nome"];
 $email = $dados["email"];

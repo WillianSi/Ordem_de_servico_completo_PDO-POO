@@ -17,6 +17,5 @@ if ($dados == 1){
 }else{
     $_SESSION['texto_erro'] = 'Os dados do terceirizado não foram alterados no sistema!';
     header ("Location:editar_perfil_terceirizado.php");
-}
-       
+}     
 ?>

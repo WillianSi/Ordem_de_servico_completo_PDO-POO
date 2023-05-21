@@ -18,6 +18,4 @@ if ($dados == 1){
 	$_SESSION['texto_erro'] = 'Os dados do terceirizado não foram alterados no sistema!';
 	header ("Location:terceirizado.php");
 }
-
-		
 ?>
